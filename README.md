@@ -52,7 +52,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MCRROOT/runtime/glnxa64
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MCRROOT/lib
 ```
 
-MutSig requires ~3 GB of reference files. Since these files are too large to include in a GitHub repository, they are hosted elsewhere. Please download them from [here](http://software.broadinstitute.org/cancer/cga/sites/default/files/data/tools/mutsig/MutSig2CV.tar.gz), and copy in the `reference` directory.
+MutSig requires ~3 GB of reference files. Since these files are too large to include in a GitHub repository, they are hosted elsewhere. Please download them from [here](http://software.broadinstitute.org/cancer/cga/sites/default/files/data/tools/mutsig/MutSig2CV.tar.gz), and copy the `reference` directory into this folder.
 
 ## Running <a name="running"></a>
 
@@ -79,8 +79,7 @@ following section, [Mutation Input Format](#mutation_inputs)
 
 * **Output directory**: Absolute path to the directory where MutSig will save its output.  Will be
 created if necessary.  NB: Any previous MutSig results in this directory will
-be overwritten!  <!-- A description of the output files and formats are in the
-following section, [Output Format] -->
+be overwritten!  A description of the output files and formats are in the following section, [Outputs](#output_format).
 
 * **Params file**: MutSig can take an optional parameters file, which allows for configuration of
   algorithm/run parameters.  User-configurable options are in the following section, [MutSig Configuration](#config).
@@ -114,7 +113,7 @@ synonyms for each column name.  Column names are case sensitive.
   
 Note that MutSig does not require any other mutation annotations; it infers everything else on its own.
 
-## Outputs
+## Outputs <a name="output_format"></a>
 
 A MutSig run outputs several files:
 
