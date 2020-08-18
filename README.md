@@ -91,7 +91,7 @@ mutation in a single patient.  Columns can be in any order, with names and
 formats as follows.  To provide maximal input flexibility, MutSig accepts
 synonyms for each column name.  Column names are case sensitive.
 
-* `chr`: Chromosome of the mutation.  MutSig only analyzes mutations on autosomal or sex chromosomes, and does not consider the mitochondrial chromosome or unplaced/alternate contigs.
+<!--* `chr`: Chromosome of the mutation.  MutSig only analyzes mutations on autosomal or sex chromosomes, and does not consider the mitochondrial chromosome or unplaced/alternate contigs.
   * Range: `(chr)?[1..24XY]`
   * Synonyms: `Chromosome`
 
@@ -109,9 +109,52 @@ synonyms for each column name.  Column names are case sensitive.
 
 * `newbase`: Observed variant allele at the position.  In the case of deletions, must be "-".
   * Regex: `(-|[ACGT]+)`
-  * Synonyms: `Tumor_Allele`, `Tum_allele`, `Alt_allele`, `Alternate_allele`, `Tumor_Seq_Allele2`
+  * Synonyms: `Tumor_Allele`, `Tum_allele`, `Alt_allele`, `Alternate_allele`, `Tumor_Seq_Allele2` -->
   
 Note that MutSig does not require any other mutation annotations; it infers everything else on its own.
+* `chr`: Chromosome of the mutation.  MutSig only analyzes mutations on
+         autosomal or sex chromosomes, and does not consider the
+         mitochondrial chromosome or unplaced/alternate contigs.
+  * Range: `(chr)?[1..24XY]`
+  * Synonyms: Chromosome
+
+* `pos` hg19 position of the mutation, 1-indexed.
+  * Regex: `[0-9]+`
+  * Synonyms: `Position`, `start`, `Start_position`
+
+* gene: HUGO symbol for the gene containing this mutation, or "Unknown"
+        for IGR mutations.
+  * Regex: `[A-Za-z0-9]+`
+  * Synonyms: `Hugo_Symbol`, `Gene_name`
+
+* `patient`: Unique identifier for the patient.
+  * Regex: `[A-Za-z0-9]+`
+  * Synonyms: `Tumor_Sample_Barcode`, `Patient_name`
+
+* `ref_allele`: hg19 reference base(s) for the position.  In the case of
+                insertions, must be "-".
+  * Regex: `(-|[ACGT]+)`
+  * Synonyms: `Reference_Allele`
+
+* `newbase`: Observed variant allele at the position.  In the case of
+                deletions, must be "-".
+  * Regex: `(-|[ACGT]+)`
+  * Synonyms: `Tumor_Allele`, `Tum_allele`, `Alt_allele`, `Alternate_allele`, `Tumor_Seq_Allele2`
+
+* `type`: Effect of mutation (e.g. missense, silent, nonsense, splice,
+        UTR).  Full list of effects can be obtained as follows: 
+        `awk 'NR > 1 { print $2 }' reference/mutation_type_dictionary.v4.txt | sort -u`
+  * Regex: N/A
+  * Synonyms: `Variant_Classification`
+
+* classification: Mutation substitution type (e.g. SNP, INS, DEL.)
+  * Regex: `(Complex_substitution|INS|DEL|[SDTO]NP)`
+  * Synonyms: `Variant_Type`
+
+If your input mutation data are missing gene/ref_allele/type/classification
+fields, we recommend annotating using Oncotator, which will produce a
+MutSig-ready MAF from a variety of input data.  Oncotator is available here:
+  https://www.broadinstitute.org/cancer/cga/oncotator
 
 ## Outputs <a name="output_format"></a>
 
